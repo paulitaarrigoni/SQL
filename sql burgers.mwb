@@ -1,0 +1,59 @@
+create database UnicornBurgers;
+use UnicornBurgers;
+CREATE table UnicornBurgers.Ventas
+(id_cliente varchar(1),
+id_producto integer,
+fecha_venta date);
+
+CREATE TABLE UnicornBurgers.Menu (
+id_producto integer,
+nombre_producto varchar(50),
+fecha_creacion_producto date,
+precio decimal(18,2));
+
+CREATE TABLE UnicornBurgers.Clientes (
+id_cliente varchar(1),
+nombre_cliente varchar(40),
+fecha_creacion timestamp);
+
+insert into UnicornBurgers.Menu (id_producto,	nombre_producto, fecha_creacion_producto,	precio) values (1,	'Unicornio con alas',	'2022-01-01' ,	12.99);
+insert into UnicornBurgers.Menu (id_producto,	nombre_producto, fecha_creacion_producto,	precio) values (2	,'La smoke',	'2022-03-15',	11.99);
+insert into UnicornBurgers.Menu (id_producto,	nombre_producto, fecha_creacion_producto,	precio) values (3,	'Guaca chicken',	'2022-02-25',	10.99);
+insert into UnicornBurgers.Menu (id_producto,	nombre_producto, fecha_creacion_producto,	precio) values (4,	'Pony con bacon',	'2022-04-01',	10.99);
+insert into UnicornBurgers.Menu (id_producto,	nombre_producto, fecha_creacion_producto,	precio) values (5,	'Bomba sexy',	'2022-04-15',	12.49);
+insert into UnicornBurgers.Menu (id_producto,	nombre_producto, fecha_creacion_producto,	precio) values (6	,'Yankee',	'2022-04-22',	13.59);
+insert into UnicornBurgers.Menu (id_producto,	nombre_producto, fecha_creacion_producto,	precio) values (7,	'Triple Queso rainbow',	'2022-05-06',	12.99);
+
+SELECT * 
+FROM Menu
+
+SELECT * 
+FROM Ventas
+
+SELECT * 
+FROM clientes
+
+update UnicornBurgers.Ventas
+set id_producto = 3 
+where fecha_venta = '2022-03-17' and id_producto = 2 and id_cliente = 4;
+
+insert into UnicornBurgers.Ventas (id_cliente,id_producto, fecha_venta) values (5 , 6,	'2022-03-03');
+UPDATE UnicornBurgers.Ventas
+SET id_cliente = 6
+WHERE fecha_venta  = '2022-03-17' AND id_cliente = 4 AND id_producto = 2;
+
+UPDATE UnicornBurgers
+SET id_producto = 3
+WHERE fecha_venta  = '2022-03-17' AND id_cliente = 6 AND id_producto = 2;
+
+ALTER TABLE UnicornBurgers.Clientes
+ADD PRIMARY KEY ( id_cliente) 
+
+ALTER TABLE UnicornBurgers.Menu
+ADD PRIMARY KEY ( id_producto) 
+
+ALTER TABLE UnicornBurgers.Ventas
+ADD FOREIGN KEY ( id_cliente) REFERENCES Clientes ( id_cliente) 
+
+ALTER TABLE UnicornBurgers.Ventas
+ADD FOREIGN KEY ( id_producto) REFERENCES Menu ( id_producto) 
