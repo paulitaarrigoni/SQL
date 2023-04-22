@@ -1,19 +1,19 @@
-##------------------------------------------------------------------- Introduction-------------------------------------------------------------------------------------
+------------------------------------------------------------------- Introduction-------------------------------------------------------------------------------------
 
-#Unicorn Burgers is a restaurant that opened in 2023 and offers the best hamburgers on the market.
+Unicorn Burgers is a restaurant that opened in 2023 and offers the best hamburgers on the market.
 
-#------------------------------------------------------------------- Problem to solve-----------------------------------------------------------------------------------
+------------------------------------------------------------------- Problem to solve-----------------------------------------------------------------------------------
 
-#Create the databases and tables to store the restaurant data, in  MYSQL, to then carry out an ETL process and 
-#be able to extract data from your restaurant POS software and update this information in your database.
+Create the databases and tables to store the restaurant data, in  MYSQL, to then carry out an ETL process and be able to extract data from
+your restaurant POS software and update this information in your database.
 
-#1 - Create the database
+1 - Create the database
 
 create database UnicornBurgers;
 
 use UnicornBurgers;
 
-#2- Create tables: Ventas, Menu and Clientes
+2- Create tables: Ventas, Menu and Clientes
 
 CREATE table UnicornBurgers.Ventas
 (id_cliente varchar(1),
@@ -31,7 +31,7 @@ id_cliente varchar(1),
 nombre_cliente varchar(40),
 fecha_creacion timestamp);
 
-#3- Insert Data in Tables
+3- Insert Data in Tables
 
 insert into UnicornBurgers.Menu (id_producto,	nombre_producto, fecha_creacion_producto,	precio) values (1,	'Unicornio con alas',	'2022-01-01' ,	12.99);
 insert into UnicornBurgers.Menu (id_producto,	nombre_producto, fecha_creacion_producto,	precio) values (2	,'La smoke',	'2022-03-15',	11.99);
@@ -74,16 +74,16 @@ INSERT INTO Clientes(fecha_venta,id_cliente,id_producto) VALUES ('10',Agatha Cri
 SELECT * 
 FROM Clientes
 
-###--------------------------------------------------Update and insert sales table records---------------------------------------------------------------------------------
-#1- Update the record that has the date of venta = 03/17/2022, id_cliente = 4, id_producto = 2 with the following data:
-#   cliente = Bux Bunny and producto = Guaca chicken
+--------------------------------------------------Update and insert sales table records---------------------------------------------------------------------------------
+1- Update the record that has the date of venta = 03/17/2022, id_cliente = 4, id_producto = 2 with the following data:
+   cliente = Bux Bunny and producto = Guaca chicken
 
 update UnicornBurgers.Ventas
 set id_producto = 3 
 where fecha_venta = '2022-03-17' and id_producto = 2 and id_cliente = 4;
 
-#2- Insert the following record in sales:
-#   fecha creacion =  03/03/2022,  cliente = Cameron Diaz  , producto = Yankee 
+2- Insert the following record in sales:
+   fecha creacion =  03/03/2022,  cliente = Cameron Diaz  , producto = Yankee 
 
 insert into UnicornBurgers.Ventas (id_cliente,id_producto, fecha_venta) values (5 , 6,	'2022-03-03');
 
@@ -95,19 +95,19 @@ UPDATE UnicornBurgers
 SET id_producto = 3
 WHERE fecha_venta  = '2022-03-17' AND id_cliente = 6 AND id_producto = 2;
 
-#----------------------------------------------------Alter table and create constraints with PK and FK-----------------------------------------------------------------
+----------------------------------------------------Alter table and create constraints with PK and FK-----------------------------------------------------------------
 
-#1. Assign to the Clientes table that the primary key must be the field `id_cliente`
+1. Assign to the Clientes table that the primary key must be the field `id_cliente`
 
 ALTER TABLE UnicornBurgers.Clientes
 ADD PRIMARY KEY ( id_cliente) 
 
-#2. Assign in the Menu table that the primary key will be `id_producto`
+2. Assign in the Menu table that the primary key will be `id_producto`
 
 ALTER TABLE UnicornBurgers.Menu
 ADD PRIMARY KEY ( id_producto) 
 
-#3. Assign in the Ventas table that the foreign keys will be: `id_customer`,`id_producto`
+3. Assign in the Ventas table that the foreign keys will be: `id_customer`,`id_producto`
 
 ALTER TABLE UnicornBurgers.Ventas
 ADD FOREIGN KEY ( id_producto) REFERENCES Menu ( id_producto) 
