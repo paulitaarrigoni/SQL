@@ -431,4 +431,16 @@ FROM learndata.fac_pedidos pe
 INNER JOIN learndata.fac_pagos_stripe s ON s.id_pedido=pe.id_pedido
 GROUP BY  pe.id_pedido;
 
-#17- 
+#17- Calculate total sales, non-STRIPE commission sales and STRIPE commissions per year
+
+SELECT
+year(fecha_pedido) AS Year,
+sum(importe_total_pedido) AS TotalSales,
+IFNULL(sum(comision_pago),0) AS Commission,
+sum(importe_total_pedido) + IFNULL(sum(comision_pago),0) AS NetSales
+FROM cursosdata.fac_pedidos pe
+LEFT JOIN learndata.fac_pagos_stripe s on s.id_pedido=pe.id_pedido
+GROUP BY year(fecha_pedido)
+
+#Power Bi
+https://app.powerbi.com/links/2XCovX1ddw?ctid=2171e36d-99d4-47fc-bdd2-dd294f064943&pbi_source=linkShare&bookmarkGuid=32137880-ddd3-40a0-b72d-c0f46211d4ed
